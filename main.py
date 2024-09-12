@@ -181,6 +181,16 @@ def get_exit_results():
     if years > 6:
         return '0% de Apuesta'  
 
+def update_globals():
+
+    global current_screen, pc_choices, veredict, years
+
+    pygame.time.delay(200)
+    pc_choices.append(pc_random_choice())
+    veredict = get_veredict()
+    years = years + veredict
+    current_screen = 'pc_turn'
+
 
 '''
 ***** GAME FLOW ***** 
@@ -209,30 +219,23 @@ def game_loop():
             elif current_screen == 'game_1_3' and event.type == pygame.MOUSEBUTTONDOWN:
                 if confess_button.collidepoint(event.pos):
                     user_choices.append('CONFESAR')
+                    update_globals()
                 elif lie_button.collidepoint(event.pos):
                     user_choices.append('MENTIR')
+                    update_globals()
                 elif silent_button.collidepoint(event.pos):
                     user_choices.append('CALLAR')
-                    
-                pygame.time.delay(200)
-                pc_choices.append(pc_random_choice())
-                veredict = get_veredict()
-                years = years + veredict
-                current_screen = 'pc_turn'
+                    update_globals()
 
             # Game rounds 4-5
             elif current_screen == 'game_4_5' and event.type == pygame.MOUSEBUTTONDOWN:
                 if confess_button.collidepoint(event.pos):
                     user_choices.append('CONFESAR')
+                    update_globals()
                 elif lie_button.collidepoint(event.pos):
                     user_choices.append('MENTIR')
+                    update_globals()
                     
-                pygame.time.delay(200)
-                pc_choices.append(pc_random_choice())
-                veredict = get_veredict()
-                years = years + veredict
-                current_screen = 'pc_turn'
-
             # PC turn
             elif current_screen == 'pc_turn' and event.type == pygame.MOUSEBUTTONDOWN:
                 
