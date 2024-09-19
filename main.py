@@ -13,14 +13,14 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 # Setup screen
-screen_width, screen_height = 1000, 800
+screen_width, screen_height = 750, 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('DILEMA DEL PRISIONERO')
 FPS = pygame.time.Clock()
 FPS.tick(60)
 
 # Font and background images
-font = pygame.font.SysFont('Arial', 32, bold=True)
+font = pygame.font.SysFont('Arial', 26, bold=True)
 welcome_background = pygame.image.load('./imgs/welcome.png')
 game_background = pygame.image.load('./imgs/game.png')
 pc_background = pygame.image.load('./imgs/pc.png')
@@ -61,7 +61,7 @@ def create_button(text, font, x, y, width, height):
 # Welcome screen
 def welcome_screen():
     screen.blit(welcome_background, (0, 0))
-    start_button = create_button('INICIAR', font, 435, 500, 160, 60)
+    start_button = create_button('INICIAR', font, 326, 375, 120, 45)
     return start_button
 
 # Game 1-3 screen
@@ -71,13 +71,13 @@ def game_1_3_screen():
     screen.blit(game_background, (0, 0))
 
     # Texts (counters)
-    draw_text(f'Ronda: {round_count}', font, WHITE, screen, 310, 106)
-    draw_text(f'Años: {years}', font, WHITE, screen, 704, 106)
+    draw_text(f'Ronda: {round_count}', font, WHITE, screen, 232, 80)
+    draw_text(f'Años: {years}', font, WHITE, screen, 528, 80)
 
     # Buttons
-    confess_button = create_button('CONFESAR', font, 250, 500, 200, 60)
-    lie_button = create_button('MENTIR', font, 550, 500, 200, 60)
-    silent_button = create_button('CALLAR', font, 400, 600, 200, 60)
+    confess_button = create_button('CONFESAR', font, 188, 375, 150, 45)
+    lie_button = create_button('MENTIR', font, 412, 375, 150, 45)
+    silent_button = create_button('CALLAR', font, 300, 450, 150, 45)
     return confess_button, lie_button, silent_button
 
 # Game 4-5 screen
@@ -87,12 +87,12 @@ def game_4_5_screen():
     screen.blit(game_background, (0, 0))
 
     # Texts (counters)
-    draw_text(f'Ronda: {round_count}', font, WHITE, screen, 310, 106)
-    draw_text(f'Años: {years}', font, WHITE, screen, 704, 106)
+    draw_text(f'Ronda: {round_count}', font, WHITE, screen, 232, 80)
+    draw_text(f'Años: {years}', font, WHITE, screen, 528, 80)
 
     # Buttons
-    confess_button = create_button('CONFESAR', font, 250, 500, 200, 60)
-    lie_button = create_button('MENTIR', font, 550, 500, 200, 60)
+    confess_button = create_button('CONFESAR', font, 188, 375, 150, 45)
+    lie_button = create_button('MENTIR', font, 412, 375, 150, 45)
     return confess_button, lie_button
 
 # PC turn screen
@@ -102,19 +102,19 @@ def pc_screen():
     screen.blit(pc_background, (0, 0))
 
     # Texts (counters)
-    draw_text(f'Ronda: {round_count}', font, WHITE, screen, 310, 106)
-    draw_text(f'Años: {years}', font, WHITE, screen, 704, 106)
-    draw_text(f'La PC ha decidido: {pc_choices[-1]}', font, WHITE, screen, 500, 354)
-    draw_text(f'Sentencia: {veredict} años', font, WHITE, screen, 500, 410)
+    draw_text(f'Ronda: {round_count}', font, WHITE, screen, 232, 80)
+    draw_text(f'Años: {years}', font, WHITE, screen, 528, 80)
+    draw_text(f'La PC ha decidido: {pc_choices[-1]}', font, WHITE, screen, 375, 266)
+    draw_text(f'Sentencia: {veredict} años', font, WHITE, screen, 375, 308)
 
 # Game over screen
 def end_screen():
 
     global years
     screen.blit(end_background, (0, 0))
-    draw_text('GAME OVER...', font, WHITE, screen, 500, 560)
-    draw_text(f'Años de condena: {years}', font, WHITE, screen, 500, 630)
-    draw_text(f'Recibes: {get_exit_results()} ', font, WHITE, screen, 500, 710)
+    draw_text('GAME OVER...', font, WHITE, screen, 375, 420)
+    draw_text(f'Años de condena: {years}', font, WHITE, screen, 375, 472)
+    draw_text(f'Recibes: {get_exit_results()} ', font, WHITE, screen, 375, 532)
 
 
 '''
