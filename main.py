@@ -1,4 +1,5 @@
 import pygame, sys, random
+import pandas as pd
 
 
 '''
@@ -254,6 +255,35 @@ def update_globals():
     years = years + veredict
     current_screen = 'pc_turn'
 
+def save_game_data():
+    
+    global user_choices, pc_choices, years, round_count
+
+    while len(user_choices) < 5:
+        user_choices.append(None)
+    
+    while len(pc_choices) < 5:
+        pc_choices.append(None)
+    
+    new_row =  {'rounds': round_count, 
+                'years': years,
+                'user_1': user_choices[0],
+                'user_2': user_choices[1], 
+                'user_3': user_choices[2], 
+                'user_4': user_choices[3], 
+                'user_5': user_choices[4], 
+                'pc_1': pc_choices[0], 
+                'pc_2': pc_choices[1],
+                'pc_3': pc_choices[2],
+                'pc_4': pc_choices[3], 
+                'pc_5': pc_choices[4]}
+    
+    df = pd.read_csv('data.csv')
+    new_row_series = pd.DataFrame([new_row])
+    new_row_series.to_csv('data.csv', mode='a', header=True, index=False)
+    df = pd.concat([df, new_row_series], ignore_index=True)
+    df.to_csv('data.csv', index=False)
+
 
 '''
 ***** GAME FLOW ***** 
@@ -363,6 +393,7 @@ def game_loop():
 
             # End of game
             elif current_screen == 'end' and event.type == pygame.MOUSEBUTTONDOWN:
+                save_game_data()
                 pygame.time.delay(800)
                 pygame.quit()
                 sys.exit()
